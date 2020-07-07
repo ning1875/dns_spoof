@@ -1,0 +1,30 @@
+- name:  dns dist
+  hosts: all
+  user: root
+  gather_facts:  false
+  become_user: root
+  vars_files:
+    - vars.yaml
+  tasks:
+
+
+      #发往远端
+      - name: copy  files
+        copy:
+          src: '{{ item.src }}'
+          dest: '{{ item.dest }}'
+          owner: root
+          group: root
+          mode: 0644
+
+        with_items:
+          - { src: '{{ conf_dir }}/dnsdist.conf', dest: '/etc/dnsdist/dnsdist.conf' }
+          - { src: '{{ conf_dir }}/dnsdist.conf', dest: '/etc/dnsdist/dnsdist.conf_{{  bk_file_name }}' }
+
+      #check配置
+      - name: exec
+        shell: /usr/bin/dnsdist --check-config
+        register: result
+      - name: Show debug info
+        debug: var=result verbosity=0
+

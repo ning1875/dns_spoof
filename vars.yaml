@@ -1,0 +1,40 @@
+redis:
+  addr: localhost
+  port: 6379
+  g_redis_serial_key: DNS_SPOOF_SERIAL_NUM
+  g_redis_map_key: DNS_SPOOF_RECORD_MAP
+
+spoof:
+  # dnsdist配置文件中劫持标志注释行
+  g_dist_spoof_flag_line: --auto spoof by sys sre
+  # dnsdist配置文件中转发标志注释行
+  g_dist_pool_flag_line: --auto forward pool by sys sre
+
+dns_dist:
+  view-a:
+    online_ip: 1.1.1.1
+    offline_ip: 1.1.1.4
+    online_all:
+      - 1.1.1.2
+      - 1.1.1.3
+
+    conf_dir: ./dnsdist_conf/view-a
+  view-b:
+    online_ip: 2.1.1.1
+    offline_ip: 2.1.1.4
+    online_all:
+      - 2.1.1.2
+      - 2.1.1.3
+
+    conf_dir: ./dnsdist_conf/view-b
+# yaml文件配置:保留默认即可
+yaml:
+  get_from_online: get_from_online.yaml
+  local_backup: local_backup.yaml
+  send_remote_online: send_remote_online.yaml
+  send_remote_offline: send_remote_offline.yaml
+  rollback_remote_offline: rollback_remote_offline.yaml
+  rollback_remote_online: rollback_remote_online.yaml
+  restart_service: restart_service.yaml
+  stop_service: stop_service.yaml
+

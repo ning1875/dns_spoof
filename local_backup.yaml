@@ -1,0 +1,13 @@
+- name:  dns dist
+  hosts: all
+  user: root
+  gather_facts:  false
+  become_user: root
+  vars_files:
+    - vars.yaml
+  tasks:
+
+      #本地备份
+      - name:  backup config
+        shell: /bin/cp -a {{ conf_dir }}/dnsdist.conf {{ conf_dir }}/dnsdist.conf_{{ bk_file_name }}
+        delegate_to: localhost

@@ -1,0 +1,17 @@
+- name:  dns dist
+  hosts: all
+  user: root
+  gather_facts:  false
+  become_user: root
+  vars_files:
+    - vars.yaml
+  tasks:
+        
+
+      #获取线上配置
+      - name: get online config
+        fetch: src=/etc/dnsdist/dnsdist.conf dest={{ conf_dir }}/dnsdist.conf flat=yes force=true
+        register: result
+      - name: Show debug info
+        debug: var=result verbosity=0 
+
