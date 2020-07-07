@@ -1,1 +1,8 @@
+coloredlogs
+IPy
 validators
+redis
+yaml
+difflib
+dnspython==1.16.0
+ansible==2.3.0.0
