@@ -1,3 +1,9 @@
+# 项目介绍
+- 使用powerdns dnsdist作为缓存dns服务器
+- dns_spoof 是基于ansible-playbook 操作pipline
+- 在dnsdist配置文件中添加劫持记录实现多view劫持A记录或劫持到指定权威dns解析的目的
+- 支持历史记录查看和回滚
+- 有完整的存量测试和灰度流程
 
 # 整体流程说明:
 - 获取线上dns_dist配置文件到本地备份
@@ -11,6 +17,12 @@
 
 
 # 使用说明
+
+## 安装依赖包
+```
+# 在python2.7环境中运行
+pip install -r requirements.txt 
+```
 ## 环境准备 vars.yaml
 - 各个view的dns_dist ip :每个region包含一个线上同步配置的server和线下测试的机器,以及全量缓存机器
   view-a:
